@@ -1,0 +1,216 @@
+package com.example.a40243_000.mc;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.HandlerThread;
+import android.os.Message;
+import android.os.StrictMode;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+
+import org.json.JSONObject;
+
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintStream;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.LogRecord;
+import android.os.Handler;
+import android.widget.TextView;
+
+public class MainActivity extends Activity {
+
+    List<String> username = new ArrayList<String>();
+    List<String> password = new ArrayList<String>();
+    EditText ET_name;
+    EditText  ET_pass;
+    TextView txt;
+    ListView ls;
+    private Boolean status=true;
+    private String[] user;
+    private  String[] pass;
+    private Thread t;
+    private int sucess=0,fail=0;
+    String failtemp;
+    int timer;
+    Button btn;
+    private SharedPreferences settings;
+    SharedPreferences sharedPreferences;
+    int count=0;
+    private static final String data = "DATA";
+    private static final String number = "number";
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        settings = getSharedPreferences(data,0);
+        count =settings.getInt(number,0);
+        ET_name=(EditText)findViewById(R.id.editText);
+        ET_pass=(EditText)findViewById(R.id.editText2);
+       btn=(Button)findViewById(R.id.button2) ;
+        txt=(TextView)findViewById(R.id.textView3);
+        review();
+        //socketThread s = new socketThread();
+        //s.start();
+    }
+
+    public void newuser(View view)
+    {
+        count++;
+        SavePref("user"+count ,ET_name.getText().toString());
+        SavePref("pass"+count ,ET_pass.getText().toString());
+        settings = getSharedPreferences(data,0);
+        settings.edit().putInt(number,count) .commit();
+        username.add(GetPref("user"+count,null));
+        password.add(GetPref("pass"+count,null));
+        user = username.toArray( new String[0] );
+        pass= password.toArray( new String[0] );
+        ls = (ListView) findViewById(R.id.listView);
+        ls.setAdapter(new listView(this,user));
+        ET_name.setText("");
+        ET_pass.setText("");
+        btn.setVisibility(View.VISIBLE);
+    }
+    public void login(View view)
+    {
+        sucess=0;fail=0;
+        failtemp=null;
+       t =new Thread(thread);
+        t.start();
+
+
+    }
+    public void clear(View view)
+    {
+        settings.edit().clear().commit();
+        sharedPreferences.edit().clear().commit();
+        count=0;
+        Intent intent =new Intent();
+        intent.setClass(this,MainActivity.class);
+        startActivity(intent);
+    }
+    public void review()
+    {
+        if(count!=0)
+        {
+            btn.setVisibility(View.VISIBLE);
+            for(int i=0;i<count;i++)
+            {
+                int j=i+1;
+                username.add(GetPref("user"+j,null));
+                password.add(GetPref("pass"+j,null));
+            }
+            user = username.toArray( new String[0] );
+            pass= password.toArray( new String[0] );
+            ls = (ListView) findViewById(R.id.listView);
+            ls.setAdapter(new listView(this,user));
+        }
+    }
+    private void SavePref(String keyname, String value) {
+        sharedPreferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(keyname, value);
+        editor.commit();
+    }
+    private String GetPref(String keyname, String value) {
+        sharedPreferences = getPreferences(MODE_PRIVATE);
+        return sharedPreferences.getString(keyname, value);
+    }
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch(msg.what){
+                case 1:
+                    if(fail!=0)
+                    txt.setText("帳號"+failtemp+"失敗");
+                    else
+                        txt.setText("全部成功!!");
+                    break;
+            }
+        }
+    };
+   private Runnable thread =new Runnable(){
+
+       @Override
+       public void run()
+       {
+           int c;
+           for(int i=0;i<user.length;i++)
+           {
+               String tmp=null;
+               status=true;
+               timer=0;
+               Socket client = new Socket();
+               InetSocketAddress isa = new InetSocketAddress("ptt.cc", 23);
+               try {
+                   client.connect(isa);
+                   BufferedReader  br=new BufferedReader(new InputStreamReader(client.getInputStream(),"MS950"));
+                   BufferedWriter  bw = new BufferedWriter( new OutputStreamWriter(client.getOutputStream()));
+                   if(client.isConnected())
+                       Log.e("連線成功","");
+                   bw.write(user[i]+"\r\n");
+                   bw.flush();
+                   bw.write(pass[i]+"\r\n");
+                   bw.flush();
+
+                   while((c=br.read())!=-1)
+                   {
+                       tmp+=(char)c;
+                       if(tmp.indexOf("密碼不對或無此帳號")!=-1||tmp.indexOf("請重新輸入")!=-1)
+                       {
+                           fail++;
+                           int j=i+1;
+                           if(failtemp==null)
+                           failtemp=""+j;
+                           else
+                           failtemp+=","+j;
+                           break;
+                       }
+                       else if(tmp.indexOf("有其它連線")!=-1)
+                       {
+                           bw.write("Y\r\n");
+                           bw.flush();
+                           tmp=null;
+                       }
+                       else if(tmp.indexOf("歡迎您再度拜訪")!=-1)
+                       {
+                           sucess++;
+                           break;
+                       }
+                       System.out.println((char)c);
+                   }
+
+                   Message msg = new Message();//傳送UI
+                   msg.what = 1;
+                   mHandler.sendMessage(msg);
+                   bw.close();
+                   br.close();
+                   client.close();
+               } catch (java.io.IOException e) {
+                   System.out.println("Socket連線有問題 !");
+                   System.out.println("IOException :" + e.toString());
+               }
+           }
+
+
+       }
+   };
+}
+
