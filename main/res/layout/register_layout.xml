@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="註冊"
+        android:layout_alignParentTop="true"
+        android:id="@+id/textView"
+        android:textColor="#1a0606"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:textSize="30dp" />
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/textView"
+        android:hint="名字"
+        android:ems="10"
+        android:id="@+id/name"
+        android:layout_gravity="center"
+
+        android:layout_alignLeft="@+id/new_user_pass"
+        android:layout_alignStart="@+id/new_user_pass"
+        android:layout_alignRight="@+id/new_user_pass"
+        android:layout_alignEnd="@+id/new_user_pass" />
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="帳號"
+        android:inputType="text"
+        android:id="@+id/new_user_name"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/name"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="密碼"
+        android:inputType="textPassword"
+        android:id="@+id/new_user_pass"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/new_user_name"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:inputType="text"
+        android:id="@+id/new_email"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/new_user_pass"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="聯絡電話"
+        android:inputType="text"
+        android:id="@+id/new_Tel"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/new_tel"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="註冊"
+        android:id="@+id/button2"
+        android:onClick="userReg"
+        android:layout_below="@+id/new_user_pass"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center" />
+
+</LinearLayout>

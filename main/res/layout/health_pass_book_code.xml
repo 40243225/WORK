@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/yellow">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A"
+        android:layout_alignParentTop="true"
+        android:id="@+id/Date"
+        android:textColor="#1a0606"
+        android:layout_centerHorizontal="true"
+        android:textSize="15dp"
+        android:layout_gravity="center_horizontal" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A"
+        android:layout_alignParentTop="true"
+        android:id="@+id/Disease"
+        android:textColor="#1a0606"
+        android:layout_centerHorizontal="true"
+        android:textSize="15dp"
+        android:layout_gravity="center_horizontal" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=""
+        android:id="@+id/zero"
+        android:layout_gravity="center_horizontal" />
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="464dp"
+        android:id="@+id/listView1"
+        android:dividerHeight="1dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</LinearLayout>

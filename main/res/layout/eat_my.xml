@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:background="@drawable/yellow">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textView7"
+            android:text="第"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="N"
+            android:id="@+id/textN"
+            android:layout_alignTop="@+id/textView7"
+            android:layout_toEndOf="@+id/textView7"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:layout_toRightOf="@+id/textView7" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="次吃藥"
+            android:id="@+id/textView9"
+            android:layout_marginStart="31dp"
+            android:layout_alignTop="@+id/textN"
+            android:layout_toEndOf="@+id/textN"
+            android:layout_marginLeft="31dp"
+            android:layout_toRightOf="@+id/textN" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/textView9"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/textView9">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="修改時間"
+                android:id="@+id/revise"
+                android:textColor="#ffffff"
+                android:background="@drawable/btn_purple"
+                android:layout_marginEnd="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:onClick="Revise"
+                android:layout_marginRight="30dp"
+                android:layout_alignParentRight="true" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="00:00"
+            android:id="@+id/textTime4"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:textSize="50sp"
+            android:layout_alignParentLeft="true" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/textTime4"
+            android:layout_alignBottom="@+id/textTime4"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/textTime4">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="刪除時間"
+                android:id="@+id/delete"
+                android:background="@drawable/btn_red"
+                android:textColor="#ffffff"
+                android:layout_marginEnd="30dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:onClick="Delete"
+                android:layout_marginRight="30dp"
+                android:layout_alignParentRight="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="否"
+                android:id="@+id/textEn"
+                android:layout_gravity="center_horizontal"
+                android:layout_centerVertical="true"
+                android:textColor="#bc0f0f"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

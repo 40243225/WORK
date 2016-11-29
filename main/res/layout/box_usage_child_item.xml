@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/date_text"
+                android:layout_column="0"
+                android:background="#ffffff"
+                android:textSize="23dp"
+                android:text="17:50PM"
+                android:layout_weight="10"
+                android:layout_span="2"
+                android:gravity="center_horizontal"/>
+
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/weight_open_text"
+                android:layout_column="1"
+                android:background="@color/bright_foreground_disabled_material_light"
+
+                android:textIsSelectable="false"
+                android:textColor="#ffffff"
+                android:textSize="23dp"
+                android:text="120.5G"
+                android:layout_span="2"
+                android:gravity="center_horizontal"/>
+
+        </TableRow>
+
+    </TableLayout>
+</LinearLayout>
